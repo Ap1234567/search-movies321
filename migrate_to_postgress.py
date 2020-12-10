@@ -13,7 +13,7 @@ database = PostgresqlDatabase(
     user=os.getenv("USER"),
     password=os.getenv("PASSWORD"),
     host=os.getenv("HOST"),
-    port=os.getenv("PORT"),
+    port=int(os.getenv("PORT")),
 )
 
 class UnknownField(object):
