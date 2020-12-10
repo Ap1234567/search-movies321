@@ -60,10 +60,10 @@ def register():
     return 'Success!'
 
 # @app.route('/')
-# def get_all(table_name):
-#     table = get_table_module(table_name)
-#     entities = table.select()
-#     return entities
+def get_all(table_name):
+    table = get_table_module(table_name)
+    entities = table.select()
+    return entities
 
 
 @app.route('/login', methods=['GET', 'POST'])
