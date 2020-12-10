@@ -9,11 +9,11 @@ import os
 import pandas as pd
 
 database = PostgresqlDatabase(
-    "d85ja4vg37fta1",
-    user="nxzgsjauliebsa",
-    password="348754ddd23415566ae37bf28c29030671330a926c4a0a686ef8fba2601b7147",
-    host="ec2-35-169-184-61.compute-1.amazonaws.com",
-    port=5432,
+    os.getenv("DATABASE"),
+    user=os.getenv("USER"),
+    password=os.getenv("PASSWORD"),
+    host=os.getenv("HOST"),
+    port=os.getenv("PORT"),
 )
 
 class UnknownField(object):
