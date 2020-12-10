@@ -5,6 +5,7 @@ from peewee import (
 
 from datetime import datetime
 import json
+import os
 import pandas as pd
 
 database = PostgresqlDatabase(
