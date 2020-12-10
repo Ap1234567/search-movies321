@@ -1,0 +1,32 @@
+{% extends "base.j2" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<form action="/search_movies" method="POST">
+    <label for="movies_name">Name of Movie:</label>
+    <input type="text" name="movies_name" id="movies_name">
+    <label for="genres">Genre:</label>
+    <select id="genre" name="genre" class="form-control">
+        <option>Choose...</option>
+        {% for i in all_genres %}
+            <option value="{{i.id}}">{{ i.name }}</option>
+        {% endfor %}
+    </select>
+    <label for="company">Company:</label>
+    <select id="company" name="company" class="form-control">
+        <option>Choose...</option>
+        {% for z in all_companies %}
+            <option value="{{z.id}}">{{ z.name }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit" class='btn btn-success'>Gogogo</button>
+
+{% if chosen_movies %}
+    <form action="\choose_one" method="GET">
+        <div class="results">
+            {% for movie in chosen_movies %}
+                <a href="/view_image/{{ movie.id }}"><img src="{{movie.poster}}" alt="{{movie.title | title}} image"></a>
+            {% endfor %}
+        </div>
+    </form>
+{% endif %}
+{% endblock %}

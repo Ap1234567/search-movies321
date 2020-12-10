@@ -1,0 +1,15 @@
+{% extends "base.j2" %}
+{% block title %}Registration{% endblock %}
+{% block content %}
+<form action="/register" method="POST">
+    <label for="username">Username:</label>
+    <input type="text" name="username" id="username">
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password">
+    <label for="email">Mail:</label>
+    <input type="email" name="email" id="email">
+    <label for="birthday">Birthdate:</label>
+    <input type="date" id="birthday" name="birthday">
+    <button type="submit" class='btn btn-success'>Gogogo</button>
+</form>
+{% endblock %}

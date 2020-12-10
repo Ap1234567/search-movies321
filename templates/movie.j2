@@ -1,0 +1,14 @@
+{% extends "base.j2" %}
+{% block title %}#{{id}} - {{title}}{% endblock %}
+{% block content %}
+  <div class="movie">
+    <h2>{{title}}</h2>
+    <div><img src="{{ poster }}"></div>
+    <div id="overview">{{overview}}</div>
+    <div id="rating">
+      <span>{{pverview}}</span>
+    </div>
+    <div id="budget">Budget: {{budget}}</div>
+    <div id="revenue">Revenue: {{revenue}}</div>
+  </div>
+{% endblock %}
