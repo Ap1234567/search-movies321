@@ -97,10 +97,6 @@ TABLES = [
     MoviesGenres, MoviesCompanies, Comments
 ]
 
-# with database.connection_context():
-#     database.create_tables(TABLES, safe=True)
-#     database.commit()
-
 def get_poster(movie):
     location = "https://image.tmdb.org/t/p/original" 
     if movie["poster_path"] is not None:
@@ -243,6 +239,9 @@ def insert_to_relative_tables(movies):
 
 def main():
     pass
+    # with database.connection_context():
+    # database.create_tables(TABLES, safe=True)
+    # database.commit()
     # movies = set_movies_data()
     # insert_movies(database, movies)
     # insert_to_side_tables(movies)
