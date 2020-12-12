@@ -95,7 +95,15 @@
         <img id="frontImage" src="/static/images/django.jfif" height="275" width="200" alt="some text"></div>
     </div>
     </div>
-    <div id="content">{% block content %}{% endblock %}</div>
+    <div id="content">
+    {% if session["username"]%}
+        <h2 class="hello_user">Hello {{session["username"]}}!</h2>
+    {% endif %}
+    {% block content %}{% endblock %}
+    {% if serever_message%}
+    <h3>{{serever_message}}</h3>
+    {% endif %}
+    </div>
     <div id="footer" class="fixed-bottom">
         {% block footer %}
         <br>

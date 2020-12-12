@@ -2,7 +2,7 @@ from typing import Any, List
 from datetime import datetime
 
 import bcrypt
-from flask import Flask, abort, render_template, request, session, url_for
+from flask import Flask, render_template, request, session, url_for
 from playhouse.shortcuts import model_to_dict
 import peewee
 from werkzeug.utils import redirect
@@ -36,9 +36,9 @@ def register():
     existing_emails = list(existing_emails.dicts())
     existing_emails = [d["email"] for d in existing_emails]
     if fields["username"] in existing_names:
-        abort(422, f"This username is already occupied, please choose another.")
+        return render_template("register.j2", server_message=f"This username is already occupied, please choose another.")
     if fields["email"] in existing_emails:
-        abort(422, f"This email is already occupied, please choose another.")
+        return render_template("register.j2", server_message=f"This email is already occupied, please choose another.")
     Users.create(**fields)
     user = Users.select().where(Users.username == fields["username"]).get()
     session['username'] = user.username
@@ -56,23 +56,21 @@ def get_all(table_name):
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'GET':
-        return render_template('login.j2')
     if session.get('username') is not None:
         return render_template('search_movies.j2', 
             all_genres=get_all("genres"), 
             all_companies=get_all("companies"))
+    if request.method == 'GET':
+        return render_template('login.j2')
     username = request.form['username']
-    if username is None:
-        return abort(400, 'No username supplied')
     try:
         user = Users.select().where(Users.username == username).get()
     except peewee.DoesNotExist:
-        return abort(404, f'User {username} does not exists')
+        return render_template('login.j2', serever_message=f"User {username} does not exists")
     password = request.form['password'].encode('utf-8')
     real_password = str(user.password).encode('utf-8')
     if not bcrypt.checkpw(password, real_password):
-        return abort(403, 'Username and password does not match')
+        return render_template('login.j2', serever_message="Username and password does not match")
     session['username'] = user.username
     session['user_id'] = user.id
     return render_template('search_movies.j2', 

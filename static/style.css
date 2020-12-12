@@ -39,8 +39,8 @@ img{
 }
 
 #film{
-    width: 7.5%;
-    height: 20%;
+    width: 1em;
+    height: 1em;
 }
 
 
@@ -89,7 +89,7 @@ img{
 }
 
 .date_label{
-    grid_area: seven
+    grid-area: seven
 }
 
 .date_entry{
@@ -125,12 +125,16 @@ img{
     color: black;
   }
   
-  .topnav a.active {
+  /* .topnav a.active {
     background-color: #4CAF50;
     color: white;
-  }
+  } */
 
   .headline{
       display:flex;
       justify-content: space-evenly;
+  }
+
+  .hello_user{
+      text-align: center;
   }
