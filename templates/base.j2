@@ -2,12 +2,99 @@
 <html lang="en">
 <head>
     {% block head %}
-    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
     <title>{% block title %}{% endblock %}</title>
     {% endblock %}
+        <script>
+      var images = ["/static/images/django.jfif", "/static/images/forrestGump.jfif", "/static/images/rocky.jfif", "/static/images/titanic.jfif"];
+    function changeImage()
+    {
+        var i = 0
+        var inter = setInterval(function(){
+            if(i >= 0)
+            {
+                document.getElementById("frontImage").src = images[i%4];
+                i++;
+            }
+        },3000);
+    }
+
+    function validateEntry(name, value){
+        if(value == "")
+        {
+            alert("You must fill a " + name + "!")
+            return false;
+        }
+        if(value.length < 4)
+        {
+            alert(name + " must have at least 4 charcters")
+            return false;
+        }
+        return true;
+    }
+
+    function validateLogIn(){
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        if(!validateEntry("username", username))
+        {
+            return false
+        }
+        if(!validateEntry("password", password))
+        {
+            return false
+        }
+        return true
+    }
+
+    function validateRegister(){
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        var email = document.getElementById("email").value;
+        var birthday = document.getElementById("birthday").value;
+        if(!validateEntry("username", username))
+        {
+            return false
+        }
+        if(!validateEntry("password", password))
+        {
+            return false
+        }
+        if(!validateEntry("email", email))
+        {
+            return false
+        }
+        if(!email.includes("@"))
+        {
+            alert("emails must have @.")
+            return false;
+        }
+        if(!birthday)
+        {
+            alert("please choose your birthday.")
+            return false;
+        }
+        return true;
+    }
+    </script>
 </head>
-<body>
+<body onload="changeImage()">
+<div class="upper">
+    <div class="leftside">
+    <div class="headline"><h1>Search Your Perfect Movie <img id="film" src="/static/images/film.jfif" alt="film"></h1></div>
+        <div class="topnav">
+            <a href="/login" class="active" href="#home">Login</a>
+            <a href="/register">Register</a>
+            <a href="/search_movies">Search</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+    <div class="right side">
+        <div class="changingPoster">
+        <img id="frontImage" src="/static/images/django.jfif" height="275" width="200" alt="some text"></div>
+    </div>
+    </div>
     <div id="content">{% block content %}{% endblock %}</div>
     <div id="footer" class="fixed-bottom">
         {% block footer %}

@@ -1,6 +1,6 @@
 from peewee import (
     DateField, FloatField, IntegerField, Model,
-    PostgresqlDatabase, TextField,
+    PostgresqlDatabase, TextField, ForeignKeyField
 )
 
 from datetime import datetime
@@ -85,8 +85,8 @@ class MoviesCompanies(BaseModel):
         table_name = 'movies_companies'        
 
 class Comments(BaseModel):
-    movie_id = IntegerField()
-    user_id = IntegerField()
+    movie_id = ForeignKeyField(Movies)
+    user_id = ForeignKeyField(Users)
     content = TextField()
     stars = IntegerField()
     time = DateField()
@@ -201,7 +201,6 @@ def get_table_class(table_name):
     for t in TABLES:
         if t.__name__ == table_name.title():
             return t
-
     raise NoSuchTableException()
 
 
@@ -243,7 +242,8 @@ def insert_to_relative_tables(movies):
     database.commit()
 
 def main():
-    movies = set_movies_data()
-    insert_movies(database, movies)
-    insert_to_side_tables(movies)
-    insert_to_relative_tables(movies)
+    pass
+    # movies = set_movies_data()
+    # insert_movies(database, movies)
+    # insert_to_side_tables(movies)
+    # insert_to_relative_tables(movies)

@@ -1,11 +1,15 @@
 {% extends "base.j2" %}
 {% block title %}Login{% endblock %}
 {% block content %}
-<form action="/login" method="POST">
-    <label for="username">Username:</label>
-    <input type="text" name="username" id="username">
-    <label for="password">Password:</label>
-    <input type="password" name="password" id="password">
-    <button type="submit" class='btn btn-success'>Gogogo</button>
+<form onsubmit="return validateLogIn()" action="/login" method="POST">
+
+    <div class="login form">
+        <div class="username_label"><label for="username">Username:</label></div>
+        <div class="username_entry"><input type="text" name="username" id="username"></div>
+        <div class="passsword_label"><label for="password">Password:</label></div>
+        <div class="password_entry"><input type="password" name="password" id="password"></div>
+        <button type="submit" class='btn btn-success'>Gogogo</button>
+    </div>
+
 </form>
 {% endblock %}

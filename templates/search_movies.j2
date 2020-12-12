@@ -2,31 +2,32 @@
 {% block title %}Login{% endblock %}
 {% block content %}
 <form action="/search_movies" method="POST">
-    <label for="movies_name">Name of Movie:</label>
-    <input type="text" name="movies_name" id="movies_name">
-    <label for="genres">Genre:</label>
-    <select id="genre" name="genre" class="form-control">
-        <option>Choose...</option>
+<div class="movie_info">
+    <div class="name_label"><label for="movie_name">Name:</label></div>
+    <div class="name_entry"><input type="text" name="movie_name" id="movie_name"></div>
+    <div class="genre_label"><label for="genres">Genre:</label></div>
+    <div class="genre_entry"><select id="genre" name="genre" class="form-control">
+        <option></option>
         {% for i in all_genres %}
             <option value="{{i.id}}">{{ i.name }}</option>
         {% endfor %}
-    </select>
-    <label for="company">Company:</label>
-    <select id="company" name="company" class="form-control">
-        <option>Choose...</option>
+    </select></div>
+    <div class="comapny_label"><label for="company">Company:</label></div>
+    <div class="company_entry"><select id="company" name="company" class="form-control">
+        <option></option>
         {% for z in all_companies %}
             <option value="{{z.id}}">{{ z.name }}</option>
         {% endfor %}
-    </select>
-    <button type="submit" class='btn btn-success'>Gogogo</button>
-
-{% if chosen_movies %}
+    </select></div>
+</div><br>
+<span>Use the above fields to limit your search or just leave them empty and see them all!</span><br>
+<button type="submit" class='btn btn-success'>Gogogo</button>
     <form action="\choose_one" method="GET">
         <div class="results">
-            {% for movie in chosen_movies %}
-                <a href="/view_image/{{ movie.id }}"><img src="{{movie.poster}}" alt="{{movie.title | title}} image"></a>
+            {% for movie in display_movies %}
+                <a href="/view_movie/{{ movie.id }}"><img src="{{movie.poster}}" alt="{{movie.title | title}} image" title="{{ movie.tagline }}"></a>
             {% endfor %}
         </div>
     </form>
-{% endif %}
+
 {% endblock %}

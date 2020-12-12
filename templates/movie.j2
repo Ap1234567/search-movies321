@@ -2,13 +2,33 @@
 {% block title %}#{{id}} - {{title}}{% endblock %}
 {% block content %}
   <div class="movie">
-    <h2>{{title}}</h2>
-    <div><img src="{{ poster }}"></div>
-    <div id="overview">{{overview}}</div>
+    <h2>{{movie.title}}</h2>
+    <div><img src="{{ movie.poster }}"></div>
+    <div id="overview">{{movie.overview}}</div>
     <div id="rating">
-      <span>{{pverview}}</span>
+      <span>{{movie.pverview}}</span>
     </div>
-    <div id="budget">Budget: {{budget}}</div>
-    <div id="revenue">Revenue: {{revenue}}</div>
-  </div>
+    <div id="budget"><b>Budget:</b> {{movie.budget}} $</div>
+    <div id="revenue"><b>Revenue:</b> {{movie.revenue}} $</div>
+    <div id="votes"><b>Votes:</b> {{movie.vote_count}}</div>
+    <div id="average_vote"><b>Average Vote:</b> {{movie.vote_average}}</div>
+    <div id="companies"><b>Production Companies:</b> {{movie.companies}}</div>
+    <div id="genres"><b>Genres:</b> {{movie.genres}}</div>
+    <div><b>Comments:</b></div>
+    {% for comment in comments: %}
+      <div> {{ comment.content }} <span class="comment_details">(Written by: {{ comment.username }} at {{ comment.time.strftime("%m/%d/%Y") }} ({{ comment.stars }} stars))</span></div>
+    {% endfor %}
+    <form action="/leave_comment/{{ movie.id }}" method="POST">
+    <div class="write">
+      <div><label for="content"><b>Write one here: </b></label></div>
+      <div><input type="text" name="content" id="content"></div>
+      <div><label for="stars"><b>Rate: </b></label></div>
+      <div><select id="stars" name="stars" class="form-control"></div>
+        {% for i in range(1, 11) %}
+          <option value="{{i}}">{{ i }}</option>
+        {% endfor %}
+        </select>
+    </div>
+  </div><br>
+  <button type="submit" class='btn btn-success'>Gogogo</button>
 {% endblock %}
